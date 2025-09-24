@@ -1,8 +1,13 @@
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, BookOpen, Star, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+import DemoModal from "@/components/DemoModal";
 
 const Index = () => {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10">
       {/* Header */}
@@ -18,10 +23,14 @@ const Index = () => {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost">Sign In</Button>
-              <Button className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90">
-                Get Started
-              </Button>
+              <Link to="/auth">
+                <Button variant="ghost">Sign In</Button>
+              </Link>
+              <Link to="/auth">
+                <Button className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -38,13 +47,20 @@ const Index = () => {
               Join thousands of kids on an exciting educational journey. Complete lessons, earn points, unlock achievements, and level up your knowledge!
             </p>
             <div className="flex justify-center space-x-4">
+              <Link to="/auth">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg px-8 py-6"
+                >
+                  Start Learning Now
+                </Button>
+              </Link>
               <Button 
+                variant="outline" 
                 size="lg" 
-                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg px-8 py-6"
+                className="text-lg px-8 py-6"
+                onClick={() => setIsDemoModalOpen(true)}
               >
-                Start Learning Now
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6">
                 Watch Demo
               </Button>
             </div>
@@ -193,12 +209,14 @@ const Index = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join thousands of kids who are already having fun while learning new things every day!
           </p>
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg px-8 py-6"
-          >
-            Create Your Free Account
-          </Button>
+          <Link to="/auth">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg px-8 py-6"
+            >
+              Create Your Free Account
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -218,6 +236,12 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Demo Modal */}
+      <DemoModal 
+        isOpen={isDemoModalOpen} 
+        onClose={() => setIsDemoModalOpen(false)} 
+      />
     </div>
   );
 };
